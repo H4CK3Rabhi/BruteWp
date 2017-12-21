@@ -18,4 +18,4 @@ WARNING - DON'T DO ANY ILLEGAL WORK. You will be RESPONSIBLE for your own action
 
 #Enter the name of the password list file : wordlist.txt
 
-#This only works with website where login page is accessible from example.com/wp-login.php and low server/hosting security
+#This only works with website where login page is accessible from example.com/wp-login.php and use it with proxychains/tor to avoid getting banned
