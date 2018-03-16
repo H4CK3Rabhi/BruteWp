@@ -2,7 +2,7 @@
 #This program is for educational purposes only.
 #Don't attack people's websites it's illegal ! 
 #If you want to crack into someone's website, you must have the permission of the owner. 
-#Abhishek Sharma(@Mkuchbhi) is not responsible.
+#Abhishek Sharma(@H4CK3Rabhi) is not responsible.
   
   
 import sys
@@ -16,8 +16,8 @@ GHT = '''
         	+=======================================+
         	|.......Brute wordpress Cracker.........|
         	+---------------------------------------+
-        	|#Coder: Abhishek Sharma	        |
-        	|#github: @Mkuchbhi		        |
+        	|#Coder: Abhishek Sharma	              |
+        	|#github: @H4CK3Rabhi	                  |
         	|#Date: 21/12/2017                      |
         	|#This tool is made for pentesting      |
         	|#I take no responsibilities for the    |
